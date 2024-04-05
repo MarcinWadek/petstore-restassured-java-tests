@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite"><test verbose="2" preserve-order="true" name="C:/Users/marci/Desktop/Java/PetStore">
+    <classes><class name="api.test.StoreTests"><methods><include name="postOrder"/><include name="testGetPetByStatus"/><include name="testGetPetById"/><include name="testDeletePetById"/></methods></class><class name="api.test.UserTests"><methods><include name="testPostUser"/><include name="testGetUserByName"/>
+        <include name="testUpdateUserByFirstName"/><include name="testDeleteUserByName"/></methods></class><class name="api.test.UserTests2"><methods><include name="testPostUser"/><include name="testGetUserByName"/><include name="testUpdateUserByFirstName"/>
+        <include name="testDeleteUserByName"/></methods></class></classes></test></suite>

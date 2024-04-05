@@ -53,7 +53,7 @@ public class StoreTests {
     @Test
     public void testGetPetById(){
 
-        storePayload.setId(faker.number().numberBetween(1,11));
+        storePayload.setId(faker.number().numberBetween(5,8));
 
         Response response = StoreEndpoints.readById(this.storePayload.getId());
         response.then().log().all();
@@ -62,7 +62,7 @@ public class StoreTests {
     @Test
     public void testDeletePetById(){
 
-        storePayload.setId(faker.number().numberBetween(1,11));
+        storePayload.setId(faker.number().numberBetween(5,8));
 
         Response response = StoreEndpoints.readById(this.storePayload.getId());
         response.then().log().all();
