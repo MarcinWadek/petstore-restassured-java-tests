@@ -8,17 +8,21 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UserTests {
 
     Faker faker;
     User userPayload;
+    UserEndpoints userEndpoints;
 
     @BeforeClass
     public void setupData(){
-    faker = new Faker();
-    userPayload = new User();
+        faker = new Faker();
+        userPayload = new User();
 
-    userPayload.setId(faker.idNumber().hashCode());
+        userPayload.setId(faker.idNumber().hashCode());
         userPayload.setUsername(faker.name().username());
         userPayload.setFirstName(faker.name().firstName());
         userPayload.setLastName(faker.name().lastName());
@@ -29,8 +33,8 @@ public class UserTests {
 
     @Test(priority = 1)
     public void testPostUser(){
-       Response response =  UserEndpoints.createUser(userPayload);
-       response.then().log().all();
+        Response response =  UserEndpoints.createUser(userPayload);
+        response.then().log().all();
         Assert.assertEquals(response.getStatusCode(), 200);
     }
 
@@ -48,7 +52,6 @@ public class UserTests {
 
         Response response =  UserEndpoints.updateUser(this.userPayload.getUsername(), userPayload);
         response.then().log().all();
-//        response.then().log().body().statusCode(200); --> tak tez mozna robic asercje
         Assert.assertEquals(response.getStatusCode(), 200);
 
         Response responseAfterUpdate =  UserEndpoints.readUser(this.userPayload.getUsername());
@@ -62,5 +65,32 @@ public class UserTests {
         Response response = UserEndpoints.deleteUser(this.userPayload.getUsername());
         Assert.assertEquals(response.getStatusCode(), 200);
     }
+    @Test(priority = 4)
+    public void testLogin()
+    {
+        Response response = UserEndpoints.login();
+        Assert.assertEquals(response.getStatusCode(), 200);
+    }
+    @Test(priority = 4)
+    public void testLogout()
+    {
+        Response response = UserEndpoints.logout();
+        Assert.assertEquals(response.getStatusCode(), 200);
+    }
+    @Test(priority = 1)
+    public void testCreateUserWithList(){
 
+        List<User> userList = new ArrayList<>();
+        userList.add(userPayload);
+        Response response =  UserEndpoints.createUserWithList(userList);
+        response.then().log().all();
+        Assert.assertEquals(response.getStatusCode(), 200);
+    }
+    @Test(priority = 1)
+    public void testCreateUserWithArray(){
+        User[] userArray = { userPayload };
+        Response response =  UserEndpoints.createUserWithArray(userArray);
+        response.then().log().all();
+        Assert.assertEquals(response.getStatusCode(), 200);
+    }
 }

@@ -6,7 +6,7 @@ public class Store {
     int petId;
     int quantity;
     String shipDate;
-    String status;
+    OrderStatus status;
     boolean complete;
 
     public int getId() {
@@ -41,11 +41,11 @@ public class Store {
         this.shipDate = shipDate;
     }
 
-    public String getStatus() {
+    public OrderStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(OrderStatus status) {
         this.status = status;
     }
 

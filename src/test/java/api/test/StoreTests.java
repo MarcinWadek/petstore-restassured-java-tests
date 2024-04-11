@@ -2,6 +2,7 @@ package api.test;
 
 import api.endpoints.StoreEndpoints;
 import api.endpoints.UserEndpoints;
+import api.payload.OrderStatus;
 import api.payload.Store;
 import api.payload.User;
 import com.github.javafaker.Faker;
@@ -36,7 +37,7 @@ public class StoreTests {
         storePayload.setId(faker.number().numberBetween(1,11));
         storePayload.setPetId(faker.number().numberBetween(1,100));
         storePayload.setQuantity(faker.number().numberBetween(1,100));
-        storePayload.setStatus("status");
+        storePayload.setStatus(OrderStatus.PLACED);
         storePayload.setComplete(false);
 
         Response response = StoreEndpoints.placeOrder(storePayload);
@@ -53,7 +54,7 @@ public class StoreTests {
     @Test
     public void testGetPetById(){
 
-        storePayload.setId(faker.number().numberBetween(5,8));
+        storePayload.setId(faker.number().numberBetween(6,8));
 
         Response response = StoreEndpoints.readById(this.storePayload.getId());
         response.then().log().all();
@@ -62,7 +63,7 @@ public class StoreTests {
     @Test
     public void testDeletePetById(){
 
-        storePayload.setId(faker.number().numberBetween(5,8));
+        storePayload.setId(faker.number().numberBetween(6,8));
 
         Response response = StoreEndpoints.readById(this.storePayload.getId());
         response.then().log().all();
