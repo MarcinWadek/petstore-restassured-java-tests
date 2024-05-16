@@ -30,7 +30,7 @@ public class StoreEndpoints {
         return response;
     }
 
-    public static Response readInventories(OrderStatus status){
+    public static Response readInventories(){
 
         String get_url= getURL().getString("store_get_url");
 

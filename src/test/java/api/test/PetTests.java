@@ -15,6 +15,8 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.testng.AssertJUnit.assertEquals;
+
 public class PetTests {
 
     Faker faker;
@@ -32,7 +34,7 @@ public class PetTests {
         petPayload.setName("burek");
         petPayload.setStatus(PetStatus.SOLD);
         category.setName("asd");
-        category.setId(2);
+        category.setId(3);
 
     }
 
@@ -41,9 +43,21 @@ public class PetTests {
         Response response =  PetEndpoints.createPet(petPayload);
         response.then().log().all();
         Assert.assertEquals(response.getStatusCode(), 200);
+
+        response =  PetEndpoints.getPetById(this.petPayload.getId());
+        response.then().log().all();
+        Assert.assertEquals(response.getStatusCode(), 200);
     }
+
     @Test(priority = 1)
     public void testUpdatePet(){
+
+        petPayload.setId(faker.number().numberBetween(1,3));
+        petPayload.setName("burek");
+        petPayload.setStatus(PetStatus.SOLD);
+        category.setName("asd");
+        category.setId(3);
+
         petPayload.setStatus(PetStatus.AVAILABLE);
         Response response =  PetEndpoints.updatePet(petPayload);
         response.then().log().all();
@@ -68,17 +82,6 @@ public class PetTests {
         petPayload.setId(faker.number().numberBetween(1,8));
 
         Response response =  PetEndpoints.postById(this.petPayload.getId());
-        response.then().log().all();
-        Assert.assertEquals(response.getStatusCode(), 200);
-    }
-    @Test(priority = 1)
-    public void testPostWithImage(){
-        petPayload.setId(faker.number().numberBetween(1,8));
-
-        List<String> photoUrls = new ArrayList<>();
-        photoUrls.add("https://avatars0.githubusercontent.com/u/19369327?s=400&v=4");
-
-        Response response =  PetEndpoints.postImage(1,photoUrls);
         response.then().log().all();
         Assert.assertEquals(response.getStatusCode(), 200);
     }

@@ -3,8 +3,11 @@ package api.endpoints;
 import api.payload.User;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import org.json.JSONArray;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import static io.restassured.RestAssured.given;
@@ -63,11 +66,12 @@ public class UserEndpoints {
                 .delete(delete_url);
         return response;
     }
-    public static Response login() {
+    public static Response login(String username, String password) {
 
         String login_url= getURL().getString("user_login_url");
 
         Response response = given()
+                .params(Map.of("username", username, "password", password))
                 .when()
                 .get(login_url);
         return response;
@@ -82,14 +86,13 @@ public class UserEndpoints {
                 .get(logout_url);
         return response;
     }
-    public static Response createUserWithList(List<User> userList){
+    public static Response createUserWithList(User... userList){
 
         String user_postWithList_url= getURL().getString("user_postWithList_url");
-
         Response response = given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
-                .body(userList)
+                .body(Arrays.asList(userList))
 
                 .when()
                 .post(user_postWithList_url);
