@@ -76,6 +76,7 @@ Project is in progress.
 
 Room for improvement:
 - Add more tests to increase test coverage.
+- Create more versatile methods for validation test results
 
 To do:
 - Add usage description and screenshots to the readme.md
