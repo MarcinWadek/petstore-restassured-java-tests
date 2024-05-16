@@ -29,10 +29,14 @@ Endpoints
 - The endpoints package contains classes/files that define the endpoints used in the application.
 - Encapsulating the logic for making HTTP requests, handling responses, and processing data.
 - Providing a clean and modular interface for other parts of the application to interact with external APIs.
+
+
 Payload
 - Designed to encapsulate the data structures used as payloads in API requests and responses.
 - It contains several classes and enums that represent different entities and attributes according to the documentation.
 - User has 1 payload class, Pet has 1 payload class and 1 enum, Pet has 3 payload classes and 1 enum
+
+  
 Test
 - I use the Java facker Library to mock the data for tests
 - Each test method is responsible for testing a specific aspect of the API endpoint. 
